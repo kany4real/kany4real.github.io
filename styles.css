@@ -464,6 +464,31 @@ a.work-card:focus-visible {
   margin: 0 auto;
 }
 
+.bio-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr minmax(300px, 440px);
+  gap: clamp(40px, 8vw, 110px);
+  align-items: center;
+}
+
+.bio-hero-grid figure { margin: 0; }
+
+.bio-hero-grid img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.bio-hero-grid figcaption {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
 .bio-copy {
   max-width: 780px;
 }
@@ -635,7 +660,8 @@ a.work-card:focus-visible {
   .works-grid,
   .about,
   .poster-work,
-  .hero-detail {
+  .hero-detail,
+  .bio-hero-grid {
     grid-template-columns: 1fr;
   }
 
