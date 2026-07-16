@@ -38,6 +38,10 @@ body {
   overflow-x: hidden;
 }
 
+body.lightbox-open {
+  overflow: hidden;
+}
+
 body::before {
   content: "";
   position: fixed;
@@ -466,12 +470,30 @@ a.work-card:focus-visible {
 
 .bio-hero-grid {
   display: grid;
-  grid-template-columns: 1fr minmax(300px, 440px);
-  gap: clamp(40px, 8vw, 110px);
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 400px);
+  gap: clamp(2rem, 6vw, 5rem);
   align-items: center;
+  overflow: visible;
 }
 
-.bio-hero-grid figure { margin: 0; }
+.bio-hero-grid > div {
+  position: relative;
+  z-index: 2;
+}
+
+.bio-hero-grid h1 {
+  max-width: 100%;
+  font-size: clamp(3.8rem, 7.7vw, 7.2rem);
+  line-height: 0.9;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.bio-hero-grid figure {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+}
 
 .bio-hero-grid img {
   display: block;
@@ -496,6 +518,16 @@ a.work-card:focus-visible {
 .bio-copy p {
   color: var(--soft);
   font-size: clamp(1.02rem, 1.6vw, 1.2rem);
+}
+
+.bio-quote {
+  margin: clamp(2rem, 5vw, 3.5rem) 0;
+  padding: 0.25rem 0 0.25rem clamp(1rem, 3vw, 2rem);
+  border-left: 3px solid var(--copper);
+  color: var(--ivory);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.08;
 }
 
 .carousel {
@@ -533,6 +565,12 @@ a.work-card:focus-visible {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  cursor: zoom-in;
+}
+
+.carousel-slide img:focus-visible {
+  outline: 3px solid var(--copper);
+  outline-offset: -4px;
 }
 
 .carousel-slide figcaption {
@@ -618,6 +656,7 @@ a.work-card:focus-visible {
 }
 
 .hero-detail .eyebrow,
+.hero-detail h1,
 .hero-detail .role-line,
 .hero-detail .lead {
   grid-column: 1;
@@ -643,6 +682,43 @@ a.work-card:focus-visible {
 .detail-copy li {
   color: var(--soft);
   font-size: clamp(1rem, 1.5vw, 1.16rem);
+}
+
+.logline-block {
+  margin-top: 1rem;
+  padding: clamp(1.2rem, 3vw, 2rem);
+  border-left: 3px solid var(--copper);
+  background: rgba(242, 238, 229, 0.045);
+  color: var(--ivory) !important;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(1.45rem, 2.7vw, 2.25rem) !important;
+  line-height: 1.25;
+}
+
+.visual-metadata {
+  display: grid !important;
+  gap: 0.55rem;
+  max-width: 14rem !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  line-height: 1.2 !important;
+}
+
+.visual-kicker,
+.visual-tagline {
+  display: block;
+}
+
+.visual-kicker {
+  font-family: Manrope, Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.visual-tagline {
+  font-size: clamp(2rem, 4vw, 3.6rem);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -694,12 +770,12 @@ a.work-card:focus-visible {
   .works-grid,
   .about,
   .poster-work,
-  .hero-detail,
-  .bio-hero-grid {
+  .hero-detail {
     grid-template-columns: 1fr;
   }
 
   .hero-detail .eyebrow,
+  .hero-detail h1,
   .hero-detail .role-line,
   .hero-detail .lead,
   .hero-detail .detail-visual {
@@ -713,6 +789,21 @@ a.work-card:focus-visible {
 
   .hero {
     min-height: auto;
+  }
+}
+
+@media (max-width: 1100px) {
+  .bio-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2.2rem;
+  }
+
+  .bio-hero-grid > div {
+    max-width: 46rem;
+  }
+
+  .bio-hero-grid figure {
+    width: min(34rem, 100%);
   }
 }
 
@@ -813,6 +904,32 @@ a.work-card:focus-visible {
 .catalog-card:focus-visible {
   outline: 1px solid var(--copper);
   outline-offset: -1px;
+}
+
+.request-card {
+  background: #12171b;
+  transition: transform 180ms ease, background-color 180ms ease;
+}
+
+.request-card:hover,
+.request-card:focus-visible {
+  transform: translateY(-3px);
+  background: #182026;
+}
+
+.request-card .card-cta {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: auto;
+  padding-top: 1.4rem;
+  color: var(--ivory);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-decoration-color: var(--copper);
+  text-underline-offset: 0.35rem;
 }
 
 .work-detail {
@@ -938,12 +1055,119 @@ a.work-card:focus-visible {
 .gallery-item {
   display: block;
   overflow: hidden;
+  cursor: zoom-in;
 }
 
 .gallery-item:hover img,
 .gallery-item:focus-visible img {
   transform: scale(1.025);
   border-color: var(--copper);
+}
+
+.gallery-item:focus-visible {
+  outline: 2px solid var(--copper);
+  outline-offset: 3px;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  place-items: center;
+  padding: clamp(1rem, 3vw, 2rem);
+  background: rgba(2, 4, 6, 0.96);
+}
+
+.lightbox.is-open {
+  display: grid;
+}
+
+.lightbox-dialog {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-rows: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.8rem;
+  width: min(1180px, 100%);
+  max-height: calc(100vh - 2rem);
+}
+
+.lightbox-stage {
+  grid-column: 2;
+  grid-row: 1;
+  display: grid;
+  place-items: center;
+  min-height: 16rem;
+  max-height: calc(100vh - 8rem);
+}
+
+.lightbox-stage img {
+  width: auto;
+  max-width: 100%;
+  max-height: calc(100vh - 8rem);
+  object-fit: contain;
+}
+
+.lightbox-stage iframe {
+  width: min(100%, 960px);
+  aspect-ratio: 16 / 9;
+  border: 0;
+  background: #000;
+}
+
+.lightbox-caption {
+  grid-column: 2;
+  grid-row: 2;
+  margin: 0;
+  color: var(--soft);
+  text-align: center;
+}
+
+.lightbox-close,
+.lightbox-previous,
+.lightbox-next {
+  min-width: 3rem;
+  min-height: 3rem;
+  border: 1px solid rgba(242, 238, 229, 0.42);
+  background: rgba(9, 12, 15, 0.86);
+  color: var(--ivory);
+  cursor: pointer;
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus-visible,
+.lightbox-previous:hover,
+.lightbox-previous:focus-visible,
+.lightbox-next:hover,
+.lightbox-next:focus-visible {
+  border-color: var(--copper);
+  outline: 2px solid var(--copper);
+  outline-offset: 2px;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  font-size: 1.5rem;
+}
+
+.lightbox-previous {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.lightbox-next {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.lightbox[data-single="true"] .lightbox-previous,
+.lightbox[data-single="true"] .lightbox-next {
+  visibility: hidden;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -964,11 +1188,13 @@ a.work-card:focus-visible {
     linear-gradient(145deg, #151a1e, #090c0f);
 }
 
-.text-art strong {
+.text-art strong,
+.text-art h1 {
   font-family: "Cormorant Garamond", Georgia, serif;
   font-weight: 500;
   font-size: clamp(3rem, 7vw, 6.5rem);
   line-height: 0.9;
+  max-width: 100%;
 }
 
 .cta-row {
@@ -1040,5 +1266,41 @@ a.work-card:focus-visible {
   .page-intro h1 {
     font-size: clamp(3.2rem, 17vw, 5rem);
     overflow-wrap: anywhere;
+  }
+
+  .bio-hero-grid h1 {
+    font-size: clamp(3.25rem, 17vw, 5rem);
+  }
+
+  .lightbox {
+    padding: 0.75rem;
+  }
+
+  .lightbox-dialog {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: minmax(0, 1fr) auto auto;
+  }
+
+  .lightbox-stage {
+    grid-column: 1 / -1;
+  }
+
+  .lightbox-caption {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    padding: 0 0.5rem;
+  }
+
+  .lightbox-previous,
+  .lightbox-next {
+    grid-row: 3;
+  }
+
+  .lightbox-previous {
+    grid-column: 1;
+  }
+
+  .lightbox-next {
+    grid-column: 2;
   }
 }
