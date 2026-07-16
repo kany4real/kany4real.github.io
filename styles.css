@@ -251,6 +251,19 @@ h3 {
   background: rgba(9, 12, 15, 0.72);
 }
 
+a.work-card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  transition: transform 180ms ease, background-color 180ms ease;
+}
+
+a.work-card:hover,
+a.work-card:focus-visible {
+  transform: translateY(-3px);
+  background: rgba(18, 23, 28, 0.94);
+}
+
 .project-card {
   display: block;
   color: inherit;
@@ -571,5 +584,251 @@ h3 {
   .site-footer {
     grid-template-columns: 1fr;
     display: grid;
+  }
+}
+
+.page-intro {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  padding-top: clamp(6rem, 12vw, 10rem);
+  padding-bottom: clamp(3rem, 7vw, 6rem);
+}
+
+.page-intro h1 {
+  max-width: 11ch;
+  font-size: clamp(3.8rem, 10vw, 8.5rem);
+}
+
+.page-intro .lead {
+  margin-top: 1.5rem;
+}
+
+.catalog-section {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+}
+
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border: 1px solid var(--line);
+  background: var(--line);
+  gap: 1px;
+}
+
+.catalog-card {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 100%;
+  background: var(--ink);
+  color: inherit;
+  text-decoration: none;
+}
+
+.catalog-card img {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.catalog-card.poster-card img {
+  aspect-ratio: 16 / 9;
+  object-position: 50% 24%;
+}
+
+.catalog-card .project-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.catalog-card .fine-note {
+  margin-top: auto;
+  padding-top: 1.2rem;
+}
+
+.catalog-card:hover,
+.catalog-card:focus-visible {
+  outline: 1px solid var(--copper);
+  outline-offset: -1px;
+}
+
+.work-detail {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+}
+
+.work-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: end;
+}
+
+.work-hero h1 {
+  max-width: 10ch;
+  font-size: clamp(4rem, 10vw, 9rem);
+}
+
+.work-poster {
+  max-height: 42rem;
+  object-fit: cover;
+  object-position: center top;
+  border: 1px solid var(--line);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 2rem;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.facts div {
+  padding: 1rem;
+  background: rgba(9, 12, 15, 0.92);
+}
+
+.facts dt {
+  color: var(--copper);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.facts dd {
+  margin: 0.35rem 0 0;
+  color: var(--ivory);
+}
+
+.media-section,
+.work-copy-section {
+  width: min(980px, 100%);
+  margin: 0 auto;
+}
+
+.work-copy-section h2,
+.media-section h2 {
+  font-size: clamp(2.4rem, 5vw, 4.6rem);
+  margin-bottom: 1.4rem;
+}
+
+.work-copy-section p {
+  color: var(--soft);
+  font-size: clamp(1rem, 1.5vw, 1.18rem);
+  max-width: 52rem;
+}
+
+.video-frame {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--line);
+  background: #000;
+}
+
+.video-frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.episode-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.episode-card {
+  color: inherit;
+  text-decoration: none;
+  border: 1px solid var(--line);
+  background: rgba(9, 12, 15, 0.72);
+  padding: 1.2rem;
+}
+
+.episode-card span {
+  display: block;
+  color: var(--copper);
+  margin-bottom: 0.45rem;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.gallery-grid img {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border: 1px solid var(--line);
+}
+
+.text-art {
+  min-height: 24rem;
+  display: grid;
+  align-content: end;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(circle at 80% 20%, rgba(182, 111, 71, 0.22), transparent 18rem),
+    linear-gradient(145deg, #151a1e, #090c0f);
+}
+
+.text-art strong {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  line-height: 0.9;
+}
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+
+.button-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 3rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--copper);
+  color: var(--ivory);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.button-link.secondary {
+  border-color: var(--line);
+}
+
+@media (max-width: 900px) {
+  .catalog-grid,
+  .work-hero,
+  .episode-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .facts {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .work-hero h1,
+  .page-intro h1 {
+    font-size: clamp(3.2rem, 17vw, 5rem);
+    overflow-wrap: anywhere;
   }
 }

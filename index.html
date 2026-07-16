@@ -22,6 +22,37 @@
       <meta name="twitter:title" content="Kany J. Henry - Auteur-réalisateur" />
       <meta name="twitter:description" content="Films et séries de genre ancrés dans les réalités africaines." />
       <meta name="twitter:image" content="https://kany4real.github.io/public/assets/og-image.jpg" />
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Person",
+              "@id": "https://kany4real.github.io/#kany-j-henry",
+              "name": "Kany J. Henry",
+              "url": "https://kany4real.github.io/",
+              "image": "https://kany4real.github.io/public/assets/kany-about.jpg",
+              "jobTitle": "Auteur-réalisateur, scénariste et créateur de séries",
+              "email": "mailto:kanyhenry@gmail.com",
+              "nationality": { "@type": "Country", "name": "République démocratique du Congo" },
+              "homeLocation": { "@type": "Place", "name": "Conakry, Guinée" },
+              "sameAs": [
+                "https://github.com/kany4real",
+                "https://www.youtube.com/@kany4real",
+                "https://www.imdb.com/name/nm13401335/"
+              ]
+            },
+            {
+              "@type": "WebSite",
+              "@id": "https://kany4real.github.io/#website",
+              "url": "https://kany4real.github.io/",
+              "name": "Kany J. Henry — Portfolio",
+              "inLanguage": ["fr", "en"],
+              "about": { "@id": "https://kany4real.github.io/#kany-j-henry" }
+            }
+          ]
+        }
+      </script>
   </head>
   <body>
     <a class="skip-link" href="#main">Aller au contenu</a>
@@ -29,10 +60,9 @@
       <a class="brand-mark" href="/" aria-label="Kany J. Henry">KJH</a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
       <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
-        <a href="/#projects">Projets</a>
-        <a href="/#works">Œuvres</a>
+        <a href="/projects/">Projets</a>
+        <a href="/works/">Œuvres</a>
         <a href="/#about">À propos</a>
-        <a href="/#filmography">Filmographie</a>
         <a href="/#contact">Contact</a>
         <a href="/en/" hreflang="en" lang="en">EN</a>
       </nav>
@@ -97,23 +127,24 @@
           <h2 id="works-title">Images tournées, récits incarnés</h2>
         </div>
         <div class="works-grid">
-          <article class="work-card feature-work">
+          <a class="work-card feature-work" href="/works/et-si/">
             <img src="/public/assets/et-si-still.jpg" width="1800" height="765" alt="Deux personnages de Et Si… ? dans une scène de tension intime" loading="lazy" />
             <div class="work-copy">
               <p class="project-meta">Court métrage · 17 min · Programmé hors compétition au Festival Films Femmes Afrique 2026</p>
               <h3>Et Si… ?</h3>
               <p>Une œuvre intime autour du choix, du regard social et des tensions entre désir personnel, famille et tradition.</p>
             </div>
-          </article>
-          <article class="work-card poster-work">
+          </a>
+          <a class="work-card poster-work" href="/works/le-bruit-du-silence/">
             <img src="/public/assets/bruit-affiche.jpg" width="832" height="1248" alt="Affiche du court métrage Le Bruit du Silence" loading="lazy" />
             <div class="work-copy">
               <p class="project-meta">Court métrage</p>
               <h3>Le Bruit du Silence</h3>
               <p>Un drame tendu où le silence devient un espace de conflit, de mémoire et de confrontation.</p>
             </div>
-          </article>
+          </a>
         </div>
+        <div class="cta-row"><a class="button-link" href="/works/">Voir toutes les œuvres et les bandes-annonces</a></div>
       </section>
 
       <section class="section about" id="about" aria-labelledby="about-title">
@@ -133,8 +164,10 @@
           <h2 id="filmography-title">Œuvres confirmées</h2>
         </div>
         <div class="filmography-list" role="list">
-          <div role="listitem"><span>Et Si… ?</span><span>Court métrage</span></div>
-          <div role="listitem"><span>Le Bruit du Silence</span><span>Court métrage</span></div>
+          <div role="listitem"><span><a href="/works/et-si/">Et Si… ?</a></span><span>Court métrage · Scénario · Réalisation · Montage</span></div>
+          <div role="listitem"><span><a href="/works/le-bruit-du-silence/">Le Bruit du Silence</a></span><span>Court métrage · Scénario · Réalisation · Montage</span></div>
+          <div role="listitem"><span><a href="/works/les-dedales-du-reveur/">Les Dédales du Rêveur</a></span><span>Web-série · Co-réalisation · Co-scénario</span></div>
+          <div role="listitem"><span><a href="/works/debout-malgre-tout/">Debout Malgré Tout</a></span><span>Co-réalisation · Co-scénario</span></div>
         </div>
       </section>
       <section class="section contact-section" id="contact" aria-labelledby="contact-title">
