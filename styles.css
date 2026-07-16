@@ -446,6 +446,105 @@ a.work-card:focus-visible {
   color: rgba(242, 238, 229, 0.82);
 }
 
+.social-links {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.social-links a {
+  text-underline-offset: 0.3rem;
+}
+
+.bio-page {
+  width: min(980px, 100%);
+  margin: 0 auto;
+}
+
+.bio-copy {
+  max-width: 780px;
+}
+
+.bio-copy p {
+  color: var(--soft);
+  font-size: clamp(1.02rem, 1.6vw, 1.2rem);
+}
+
+.carousel {
+  position: relative;
+  width: min(980px, 100%);
+  margin: 0 auto;
+  border: 1px solid var(--line);
+  background: rgba(9, 12, 15, 0.72);
+}
+
+.carousel-viewport {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.carousel-slide {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-slide figcaption {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 2.6rem 1rem 1rem;
+  background: linear-gradient(transparent, rgba(9, 12, 15, 0.9));
+  color: var(--ivory);
+}
+
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.carousel-controls button {
+  min-height: 2.75rem;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ivory);
+  cursor: pointer;
+}
+
+.selection-list {
+  width: min(900px, 100%);
+  margin: 1.5rem auto 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.selection-list li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--soft);
+}
+
+.selection-list strong {
+  color: var(--ivory);
+}
+
 .project-page h1 {
   max-width: 10ch;
 }
@@ -584,6 +683,11 @@ a.work-card:focus-visible {
   .site-footer {
     grid-template-columns: 1fr;
     display: grid;
+  }
+
+  .selection-list li {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
   }
 }
 
