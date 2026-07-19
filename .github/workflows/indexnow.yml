@@ -1,0 +1,94 @@
+name: Notify IndexNow
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**/*.html"
+      - "sitemap.xml"
+      - ".github/workflows/indexnow.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  notify-search-engines:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the published site
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Submit changed URLs to IndexNow
+        env:
+          INDEXNOW_KEY: e2f9b744678cd3855920b73e952ead51
+          INDEXNOW_KEY_LOCATION: https://kany4real.github.io/e2f9b744678cd3855920b73e952ead51.txt
+          BEFORE_SHA: ${{ github.event.before }}
+          AFTER_SHA: ${{ github.sha }}
+        run: |
+          node <<'NODE'
+          const fs = require("node:fs");
+          const { execFileSync } = require("node:child_process");
+
+          (async () => {
+
+          const site = "https://kany4real.github.io";
+          const before = process.env.BEFORE_SHA || "";
+          const after = process.env.AFTER_SHA;
+          let changed = [];
+
+          try {
+            changed = execFileSync("git", ["diff", "--name-only", before, after], { encoding: "utf8" })
+              .split("\n")
+              .filter(Boolean);
+          } catch {
+            changed = ["sitemap.xml"];
+          }
+
+          const submitWholeSitemap =
+            changed.includes("sitemap.xml") ||
+            changed.includes(".github/workflows/indexnow.yml");
+
+          let urls;
+          if (submitWholeSitemap) {
+            const sitemap = fs.readFileSync("sitemap.xml", "utf8");
+            urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+          } else {
+            urls = changed
+              .filter((file) => file.endsWith(".html") && !/^google[^/]*\.html$/i.test(file))
+              .map((file) => {
+                if (file === "index.html") return `${site}/`;
+                if (file.endsWith("/index.html")) return `${site}/${file.slice(0, -"index.html".length)}`;
+                return `${site}/${file}`;
+              });
+          }
+
+          urls = [...new Set(urls)];
+          if (!urls.length) {
+            console.log("No public page URL changed; nothing to submit.");
+            process.exit(0);
+          }
+
+          const response = await fetch("https://api.indexnow.org/indexnow", {
+            method: "POST",
+            headers: { "content-type": "application/json; charset=utf-8" },
+            body: JSON.stringify({
+              host: "kany4real.github.io",
+              key: process.env.INDEXNOW_KEY,
+              keyLocation: process.env.INDEXNOW_KEY_LOCATION,
+              urlList: urls
+            })
+          });
+
+          if (![200, 202].includes(response.status)) {
+            throw new Error(`IndexNow rejected the submission with HTTP ${response.status}.`);
+          }
+
+          console.log(`IndexNow accepted ${urls.length} URL(s) with HTTP ${response.status}.`);
+          })().catch((error) => {
+            console.error(error);
+            process.exit(1);
+          });
+          NODE
