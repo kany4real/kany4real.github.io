@@ -745,19 +745,29 @@ a.work-card:focus-visible {
   }
 
   .main-nav {
-    display: none;
+    display: flex;
     grid-column: 1 / -1;
     width: 100%;
     flex-direction: column;
     justify-content: start;
     align-items: stretch;
     gap: 0;
-    overflow: visible;
-    padding: 0.4rem 0 0;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-0.4rem);
+    transition: max-height 260ms ease, opacity 180ms ease, transform 260ms ease, visibility 0s linear 260ms;
   }
 
   .main-nav.is-open {
-    display: flex;
+    max-height: 32rem;
+    padding-top: 0.4rem;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition-delay: 0s;
   }
 
   .main-nav a {
@@ -766,7 +776,6 @@ a.work-card:focus-visible {
   }
 
   .hero-grid,
-  .project-grid,
   .works-grid,
   .about,
   .poster-work,
@@ -789,6 +798,11 @@ a.work-card:focus-visible {
 
   .hero {
     min-height: auto;
+  }
+
+  .project-grid,
+  .catalog-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -813,8 +827,14 @@ a.work-card:focus-visible {
   }
 
   h1 {
-    font-size: clamp(3.4rem, 20vw, 5.4rem);
+    font-size: clamp(3.25rem, 17vw, 4.8rem);
+    line-height: 0.88;
     max-width: 100%;
+  }
+
+  .project-grid,
+  .catalog-grid {
+    grid-template-columns: 1fr;
   }
 
   .lead,
@@ -1171,6 +1191,7 @@ a.work-card:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .main-nav,
   .carousel-slide,
   .gallery-grid img {
     transition: none;
@@ -1220,7 +1241,6 @@ a.work-card:focus-visible {
 }
 
 @media (max-width: 900px) {
-  .catalog-grid,
   .work-hero,
   .episode-grid {
     grid-template-columns: 1fr;
